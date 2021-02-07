@@ -1,0 +1,31 @@
+spring:
+  # Kafka  KafkaProperties
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092 # Kafka Broker
+    # Kafka Producer 
+    producer:
+      acks: 1 # 
+      retries: 3 # 
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer # Key Serializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer # Value Serialier
+    # Kafka Consumer
+    consumer:
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.isn.network.model
+    # Kafka Consumer Listener
+    listener:
+      missing-topics-fatal: false # 
+
+logging:
+  level:
+    org:
+      springframework:
+        kafka: INFO # spring-kafka INFO DEBUG ERROR
+      apache:
+        kafka: INFO # kafka INFO DEBUG ERROR
